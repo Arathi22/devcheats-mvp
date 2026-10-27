@@ -15,6 +15,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <head>
       <script dangerouslySetInnerHTML={{ __html: `(() => { const saved = localStorage.getItem('devcheats-theme'); const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = saved ? (saved === 'dark' ? 'dark' : 'light') : (prefersDark ? 'dark' : 'light'); })();` }} />
     </head>
-    <body><SavedItemsProvider><LearningProgressProvider><SiteHeader />{children}<footer className="site-footer"><div className="footer-inner"><Link href="/" className="footer-brand">devnotes<span> / built for the curious</span></Link><span>Useful references. Less tab chaos.</span></div></LearningProgressProvider></SavedItemsProvider></body>
+    <body><SavedItemsProvider><LearningProgressProvider><SiteHeader />{children}<footer className="site-footer"><div className="footer-inner"><Link href="/" className="footer-brand">devnotes<span> / built for the curious</span></Link><span>Useful references. Less tab chaos.</span></div></footer></LearningProgressProvider></SavedItemsProvider></body>
   </html>;
 }

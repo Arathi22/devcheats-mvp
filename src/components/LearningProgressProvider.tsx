@@ -20,8 +20,7 @@ const LearningProgressContext = createContext<LearningProgressContextValue | nul
 export function LearningProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LearningProgress>(emptyLearningProgress);
   const [ready, setReady] = useState(false);
-  const progressRef = useRef(progress);
-  progressRef.current = progress;
+  const progressRef = useRef<LearningProgress>(emptyLearningProgress());
 
   useEffect(() => {
     const restore = () => {

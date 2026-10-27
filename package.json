@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --experimental-strip-types --test src/lib/tool-utils.test.ts src/lib/cheatsheet-utils.test.ts src/lib/cheatsheet-search.test.ts src/lib/saved-items.test.ts src/lib/playground-utils.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/tool-utils.test.ts src/lib/cheatsheet-utils.test.ts src/lib/cheatsheet-search.test.ts src/lib/saved-items.test.ts src/lib/playground-utils.test.ts src/lib/learning-paths.test.ts"
   },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",

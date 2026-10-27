@@ -18,7 +18,7 @@ export function LearningPathsBrowser() {
   const filtered = useMemo(() => {
     const term = query.trim().toLowerCase();
     return learningPaths.filter((path) => {
-      const matchesText = !term || [path.title, path.description, path.category, ...path.objectives].join(' ').toLowerCase().includes(term);
+      const matchesText = !term || [path.title, path.description, path.category, ...path.objectives, ...path.steps.flatMap((step) => [step.title, step.description])].join(' ').toLowerCase().includes(term);
       const matchesCategory = category === 'All topics' || category === path.category;
       const matchesLevel = level === 'All levels' || path.level === level || (level === 'Beginner' && path.level === 'Beginner to Intermediate') || (level === 'Intermediate' && path.level === 'Beginner to Intermediate');
       return matchesText && matchesCategory && matchesLevel;

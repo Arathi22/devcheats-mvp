@@ -16,5 +16,5 @@ export function CopyButton({ code }: { code: string }) {
     }
   }
 
-  return <button type="button" className="copy-button" onClick={copyCode} aria-label="Copy code">{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? 'Copied' : 'Copy'}</button>;
+  return <button type="button" className="copy-button" onClick={copyCode} aria-live="polite" aria-label={copied ? 'Code copied' : 'Copy code'}>{copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}{copied ? 'Copied' : 'Copy'}</button>;
 }

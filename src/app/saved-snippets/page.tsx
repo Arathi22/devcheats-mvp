@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SavedSnippetsPageContent } from '@/components/SavedSnippetsPageContent';
 
-export const metadata: Metadata = { title: 'Saved snippets', description: 'Code snippets saved locally from developer cheat sheets.' };
+export const metadata: Metadata = { title: 'Saved snippets', description: 'Code snippets saved locally from developer cheat sheets.', robots: { index: false, follow: false } };
 
 export default function SavedSnippetsPage() {
   return <SavedSnippetsPageContent />;

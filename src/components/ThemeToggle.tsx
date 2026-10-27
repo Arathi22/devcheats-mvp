@@ -2,6 +2,7 @@
 
 import { useEffect, useSyncExternalStore } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { getStorage } from '@/lib/saved-items';
 
 const themeListeners = new Set<() => void>();
 
@@ -24,7 +25,9 @@ export function ThemeToggle() {
   useEffect(() => {
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const syncSystemTheme = (event: MediaQueryListEvent) => {
-      if (window.localStorage.getItem('devcheats-theme') === null) {
+      let hasSavedTheme = false;
+      try { hasSavedTheme = getStorage()?.getItem('devcheats-theme') !== null; } catch { /* Follow the system theme when storage cannot be read. */ }
+      if (!hasSavedTheme) {
         document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
         notifyThemeChange();
       }
@@ -36,7 +39,7 @@ export function ThemeToggle() {
   function toggleTheme() {
     const next = !dark;
     document.documentElement.dataset.theme = next ? 'dark' : 'light';
-    window.localStorage.setItem('devcheats-theme', next ? 'dark' : 'light');
+    try { getStorage()?.setItem('devcheats-theme', next ? 'dark' : 'light'); } catch { /* Keep the theme toggle usable when browser storage is disabled. */ }
     notifyThemeChange();
   }
 

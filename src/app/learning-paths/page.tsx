@@ -1,8 +1,14 @@
 import type { Metadata } from 'next';
 import { LearningPathsBrowser } from '@/components/LearningPathsBrowser';
 import { validateLearningPaths } from '@/lib/learning-path-utils';
+import { getCanonicalMetadata } from '@/lib/site-url';
 
-export const metadata: Metadata = { title: 'Learning Paths', description: 'Follow curated developer learning paths with practical lessons and local progress tracking.' };
+export const metadata: Metadata = {
+  title: 'Learning Paths',
+  description: 'Follow curated developer learning paths with practical lessons and local progress tracking.',
+  openGraph: { title: 'Learning Paths', description: 'Follow curated developer learning paths with practical lessons and local progress tracking.', type: 'website' },
+  ...getCanonicalMetadata('/learning-paths'),
+};
 
 export default function LearningPathsPage() {
   const issues = validateLearningPaths();

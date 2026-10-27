@@ -23,6 +23,39 @@ npm run build
 npm start
 ```
 
+## Type checking
+
+```bash
+npm run typecheck
+```
+
+## GitHub and Vercel deployment
+
+The app is a standard Next.js deployment and does not require a separately managed server. Set `SITE_URL` in the Vercel project to your actual canonical production origin, including `https://` and with no path. It is used for canonical links, Open Graph metadata, and the sitemap. No other environment variables are required.
+
+Before pushing, review and commit only the intended files:
+
+```bash
+git status --short
+git diff --check
+git diff
+git add <reviewed-files>
+git commit -m "Prepare production deployment"
+git push origin <your-branch>
+```
+
+Do not commit `.env` files or secret values. The repository ignores `.env`, `.env.*`, `.next`, `node_modules`, `.vercel`, and common build output. Set `SITE_URL` in Vercel's project settings instead of committing a production value.
+
+Vercel checklist:
+
+1. Push the reviewed commit to GitHub, then import that repository in Vercel.
+2. Keep the detected Next.js framework and repository root settings unless the project is moved into a subdirectory.
+3. Add `SITE_URL` under **Settings → Environment Variables** for Production (and Preview if desired), then redeploy after changing it.
+4. Confirm the production build succeeds and check `/`, `/cheatsheets/<published-slug>`, `/learning-paths/<published-slug>`, `/tools`, `/sitemap.xml`, and `/robots.txt` on the deployment.
+5. Confirm unknown cheat-sheet and learning-path slugs return the site's not-found page.
+
+GitHub/Vercel deployment is not performed by these local checks; the push and project import are manual steps.
+
 ## Project structure
 
 ```text

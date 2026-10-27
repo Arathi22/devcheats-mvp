@@ -24,7 +24,8 @@ export function LearningProgressProvider({ children }: { children: ReactNode }) 
 
   useEffect(() => {
     const restore = () => {
-      const saved = getStorage()?.getItem(LEARNING_PROGRESS_KEY) ?? null;
+      let saved: string | null = null;
+      try { saved = getStorage()?.getItem(LEARNING_PROGRESS_KEY) ?? null; } catch { /* Progress remains usable in memory when storage is disabled. */ }
       const next = restoreLearningProgress(saved);
       progressRef.current = next;
       setProgress(next);

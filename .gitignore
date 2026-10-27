@@ -19,6 +19,7 @@
 /coverage/
 *.tsbuildinfo
 next-env.d.ts
+production-readiness prompt.md
 
 # Logs
 npm-debug.log*

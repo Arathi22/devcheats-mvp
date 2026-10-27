@@ -33,7 +33,9 @@ export function Playground() {
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      const restored = restoreDraft(window.localStorage.getItem(STORAGE_KEY));
+      let savedDraft: string | null = null;
+      try { savedDraft = window.localStorage.getItem(STORAGE_KEY); } catch { /* Editing and preview remain available without persistent storage. */ }
+      const restored = restoreDraft(savedDraft);
       if (restored) setDraft(restored);
       setReady(true);
     }, 0);
@@ -52,7 +54,7 @@ export function Playground() {
 
   useEffect(() => {
     if (!ready) return;
-    window.localStorage.setItem(STORAGE_KEY, serializeDraft(draft));
+    try { window.localStorage.setItem(STORAGE_KEY, serializeDraft(draft)); } catch { /* Keep the current draft in memory when storage is disabled or full. */ }
     if (!autoRun) return;
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => run(draft), 650);

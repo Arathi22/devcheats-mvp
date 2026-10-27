@@ -9,6 +9,7 @@ import { FavoriteButton } from '@/components/FavoriteButton';
 import { cheatsheets, getCheatSheet } from '@/data/cheatsheets';
 import { getEstimatedReadingMinutes, getRelatedCheatSheets, getSectionId } from '@/lib/cheatsheet-utils';
 import { learningPaths } from '@/data/learning-paths';
+import { getCanonicalMetadata } from '@/lib/site-url';
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -19,12 +20,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const sheet = getCheatSheet(slug);
-  if (!sheet) return { title: 'Cheat sheet not found' };
+  if (!sheet) return { title: 'Cheat sheet not found', robots: { index: false, follow: false } };
   return {
     title: sheet.title,
     description: sheet.description,
     keywords: [sheet.category, ...sheet.tags],
     openGraph: { title: `${sheet.title} cheat sheet`, description: sheet.description, type: 'article' },
+    ...getCanonicalMetadata(`/cheatsheets/${sheet.slug}`),
   };
 }
 

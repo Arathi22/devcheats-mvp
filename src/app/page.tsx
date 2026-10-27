@@ -2,7 +2,11 @@ import { ArrowDownRight, BookOpen, Braces, Command, Sparkles } from 'lucide-reac
 import { SearchBox } from '@/components/SearchBox';
 import { cheatsheets } from '@/data/cheatsheets';
 import { LibraryGrid } from '@/components/LibraryGrid';
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
+import { getCanonicalMetadata } from '@/lib/site-url';
+
+export const metadata: Metadata = { ...getCanonicalMetadata('/') };
 
 export default function HomePage() {
   const featured = ['javascript', 'bash', 'postgresql', 'kubernetes-kubectl'].map((slug) => cheatsheets.find((sheet) => sheet.slug === slug)).filter((sheet) => sheet !== undefined);
